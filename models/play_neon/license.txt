@@ -1,0 +1,11 @@
+Model Information:
+* title:	PLAY NEON
+* source:	https://sketchfab.com/3d-models/play-neon-8b37905a08a24c21b024896e9595acba
+* author:	s_v_bond (https://sketchfab.com/s_v_bond)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "PLAY NEON" (https://sketchfab.com/3d-models/play-neon-8b37905a08a24c21b024896e9595acba) by s_v_bond (https://sketchfab.com/s_v_bond) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

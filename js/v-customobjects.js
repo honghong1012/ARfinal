@@ -183,9 +183,19 @@ Vue.component("obj-world", {
 			:position="tree.position.toAFrame()">
 		</a-entity>
 
+		<a-entity gltf-model="url(models/arbol1/scene.gltf)" position="0 10 0"></a-entity>
+
+		<a-entity gltf-model="url(models/pine_tree/scene.gltf)" scale="0.5 0.5 0.5"
+		v-for="(tree,index) in trees3"
+			:key="'tree3' + index"
+			shadow 			
+			:rotation="tree.rotation.toAFrame()"
+			:position="tree.position.toAFrame()">
+		</a-entity>
+
 		<a-entity gltf-model="url(models/arbol2/scene.gltf)" 
 		v-for="(tree,index) in trees2"
-			:key="'tree' + index"
+			:key="'tree2' + index"
 			shadow 			
 			:rotation="tree.rotation.toAFrame()"
 			:position="tree.position.toAFrame()">
@@ -259,6 +269,21 @@ Vue.component("obj-world", {
 			trees2.push(tree)
 		}
 
+		let trees3 = []
+		let tree3Count = 10
+		for (var i = 0; i < tree3Count; i++) {
+			let h = noise(i) // Size from 1 to 3
+			let tree = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r = 20 + 15*noise(i)
+			let theta = 18 * i + noise(i*20)
+			tree.position.setToCylindrical(r, theta, h/2)
+			tree.lookAt(0,0,0)
+			trees3.push(tree)
+		}
+
 		let rocks = []
 		let rockCount = 10
 		for (var i = 0; i < rockCount; i++) {
@@ -296,6 +321,7 @@ Vue.component("obj-world", {
 		return {
 			trees: trees,
 			trees2: trees2,
+			trees3: trees3,
 			rocks: rocks,
 			balls: balls
 		}
