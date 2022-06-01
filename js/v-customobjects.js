@@ -225,28 +225,33 @@ Vue.component("obj-world", {
 		</a-entity>
 
 
-		<a-entity gltf-model="url(models/cocktail_sign/scene.gltf)" 
-			position="1 5 -3"
-			scale = "0.1 0.1 0.1"
-			rotation = "0 0 0">
-		</a-entity>
-
-		<a-entity gltf-model="url(models/wooden_bar/scene.gltf)" 
-			position="1 0 -5"
-			scale = "0.02 0.03 0.02"
-			rotation = "0 20 0">
+		<a-entity gltf-model="url(models/neon_serendipity_sign/scene.gltf)" 
+			position="-1.5 2.5 -6"
+			rotation = "0 30 0">
 		</a-entity>
 
 		<a-entity gltf-model="url(models/beer/scene.gltf)" 
-			position="0.6 1.2 -5"
+			position="-1.6 0.82 -5"
 			scale = "3 3 3"
 			rotation = "0 0 0">
 		</a-entity>
 
 		<a-entity gltf-model="url(models/cocktail_martini/scene.gltf)" 
-			position="1 1.2 -5"
+			position="-1 0.82 -5"
 			scale = "2 2 2"
 			rotation = "0 0 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/table_and_chair/scene.gltf)" 
+			position="-1 0 -5"
+			scale = "1 1 1"
+			rotation = "0 40 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/restaurant_sign/scene.gltf)" 
+			position="3 1 5"
+			scale = "0.5 0.5 0.5"
+			rotation = "0 30 0">
 		</a-entity>
 
 		<a-box 
@@ -264,14 +269,16 @@ Vue.component("obj-world", {
 			:rotation="rock.rotation.toAFrame()"
 			:position="rock.position.toAFrame()">
 		</a-box>
-		<a-entity gltf-model="url(models/anya/scene.gltf)" position="0 0 -10" animation="property: rotation; to: 0 360 0; loop: true; dur: 1000; pauseEvents:click; "
-		>
+		<a-entity gltf-model="url(models/anya/scene.gltf)" 
+			position="0 0 -10" 
+			animation="property: rotation; to: 0 360 0; loop: true; dur: 1000; pauseEvents:click; "
+			>
 		</a-entity>
 
 		<a-entity gltf-model="url(models/bar_house/scene.gltf)" 
-		position="1 0 10"
-		scale = "5 5 5"
-		rotation = "0 160 0">
+			position="1 0 10"
+			scale = "5 5 5"
+			rotation = "0 160 0">
 		</a-entity>
 
 		<a-entity 
@@ -427,7 +434,6 @@ Vue.component("obj-world", {
 			balls: balls,
 			mushrooms: mushrooms,
 			stools: stools,
-			stools2: stools2,
 		}
 	},
 
