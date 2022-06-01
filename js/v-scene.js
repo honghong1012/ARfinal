@@ -23,8 +23,11 @@ Vue.component("room-scene", {
 		<!--------- ASSETS ---------->
 		<a-assets>
 			<img id="sky" src="img/textures/sky-night.png">
+			<img id="glow" src="https://cdn.glitch.global/44e8be34-cfe8-4e64-8092-2d51a3c000d6/glow.png?v=1651450524552">
+			<a-asset-item id="tree1" src="models/arbol1/scene.gltf"></a-asset-item>
+			<a-asset-item id="tree2" src="models/arbol2/scene.gltf"></a-asset-item>
 		</a-assets>
-
+		
 		<!--------- CAMERA --------->
 
 		<a-camera id="camera" rotation-reader>
@@ -56,9 +59,7 @@ Vue.component("room-scene", {
 		
 		<obj-world :room="room" />
 
-
 		
-				
 		<a-entity position="0 0 0">
 			<a-entity text="value:hello;font:/fonts/helvetica-sdf.fnt; fontImage:/fonts/helvetica-sdf.png;width:10;color:black" position="0 1 0"></a-entity>
 			
