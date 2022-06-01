@@ -26,6 +26,8 @@ Vue.component("room-scene", {
 			<img id="glow" src="https://cdn.glitch.global/44e8be34-cfe8-4e64-8092-2d51a3c000d6/glow.png?v=1651450524552">
 			<a-asset-item id="tree1" src="models/arbol1/scene.gltf"></a-asset-item>
 			<a-asset-item id="tree2" src="models/arbol2/scene.gltf"></a-asset-item>
+			<a-asset-item id="anya" src="models/anya/scene.gltf"</a-asset-item>
+
 		</a-assets>
 		
 		<!--------- CAMERA --------->

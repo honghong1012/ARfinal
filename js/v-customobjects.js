@@ -184,7 +184,6 @@ Vue.component("obj-world", {
 		</a-entity>
 
 		<a-entity gltf-model="url(models/arbol1/scene.gltf)" position="0 10 0"></a-entity>
-
 		<a-entity gltf-model="url(models/pine_tree/scene.gltf)" scale="0.5 0.5 0.5"
 		v-for="(tree,index) in trees3"
 			:key="'tree3' + index"
@@ -216,6 +215,9 @@ Vue.component("obj-world", {
 			:rotation="rock.rotation.toAFrame()"
 			:position="rock.position.toAFrame()">
 		</a-box>
+		<a-entity gltf-model="url(models/anya/scene.gltf)" position="0 0 -10" animation="property: rotation; to: 0 360 0; loop: true; dur: 1000; pauseEvents:click; "
+		>
+		</a-entity>
 
 
 		<a-entity 
