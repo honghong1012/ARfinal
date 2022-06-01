@@ -268,6 +268,12 @@ Vue.component("obj-world", {
 		>
 		</a-entity>
 
+		<a-entity gltf-model="url(models/bar_house/scene.gltf)" 
+		position="1 0 10"
+		scale = "5 5 5"
+		rotation = "0 160 0">
+		</a-entity>
+
 		<a-entity 
 			v-for="(ball,index) in balls"
 			:key="'ball' + index"
