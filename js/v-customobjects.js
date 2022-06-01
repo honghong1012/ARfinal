@@ -390,7 +390,7 @@ Vue.component("obj-world", {
 			})
 			let r =  15 + 20*noise(i)
 			let theta = 20*i + noise(i*20)
-			mushroom.position.setToCylindrical(r, theta, h/2)
+			mushroom.position.setToCylindrical(r-2, theta, h/2)
 			mushroom.lookAt(0,0,0)
 			mushrooms.push(mushroom)
 		}
