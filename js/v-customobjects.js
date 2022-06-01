@@ -412,6 +412,7 @@ Vue.component("obj-world", {
 			stools2.push(stool)
 		}
 
+
 		return {
 			trees: trees,
 			trees2: trees2,
