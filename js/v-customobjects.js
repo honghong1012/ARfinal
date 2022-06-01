@@ -184,7 +184,6 @@ Vue.component("obj-world", {
 		</a-entity>
 
 		<a-entity gltf-model="url(models/arbol1/scene.gltf)" position="0 10 0"></a-entity>
-
 		<a-entity gltf-model="url(models/pine_tree/scene.gltf)" scale="0.7 0.7 0.7"
 		v-for="(tree,index) in trees3"
 			:key="'tree3' + index"
