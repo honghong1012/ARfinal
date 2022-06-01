@@ -1,0 +1,11 @@
+Model Information:
+* title:	Table And Chair
+* source:	https://sketchfab.com/3d-models/table-and-chair-292d33c6f0bb40c2b229cf8ba480f7b5
+* author:	wagnerlima07 (https://sketchfab.com/wagnerlima07)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Table And Chair" (https://sketchfab.com/3d-models/table-and-chair-292d33c6f0bb40c2b229cf8ba480f7b5) by wagnerlima07 (https://sketchfab.com/wagnerlima07) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
