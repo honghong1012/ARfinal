@@ -174,7 +174,7 @@ Vue.component("obj-world", {
 			castShadow target="#directionaltarget">
 			<a-entity id="directionaltarget" position="-10 0 -20"></a-entity>
 		</a-light>
-
+		
 		<a-entity gltf-model="url(models/arbol1/scene.gltf)" 
 		v-for="(tree,index) in trees"
 			:key="'tree' + index"
@@ -184,12 +184,21 @@ Vue.component("obj-world", {
 		</a-entity>
 
 		<a-entity gltf-model="url(models/arbol1/scene.gltf)" position="0 10 0"></a-entity>
-		<a-entity gltf-model="url(models/pine_tree/scene.gltf)" scale="0.5 0.5 0.5"
+
+		<a-entity gltf-model="url(models/pine_tree/scene.gltf)" scale="0.7 0.7 0.7"
 		v-for="(tree,index) in trees3"
 			:key="'tree3' + index"
 			shadow 			
 			:rotation="tree.rotation.toAFrame()"
 			:position="tree.position.toAFrame()">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/night_mushrooms/scene.gltf)" scale="0.3 0.3 0.3"
+		v-for="(mushroom,index) in mushrooms"
+			:key="'mushroom' + index"
+			shadow 			
+			:rotation="mushroom.rotation.toAFrame()"
+			:position="mushroom.position.toAFrame()">
 		</a-entity>
 
 		<a-entity gltf-model="url(models/arbol2/scene.gltf)" 
@@ -218,7 +227,6 @@ Vue.component("obj-world", {
 		<a-entity gltf-model="url(models/anya/scene.gltf)" position="0 0 -10" animation="property: rotation; to: 0 360 0; loop: true; dur: 1000; pauseEvents:click; "
 		>
 		</a-entity>
-
 
 		<a-entity 
 			v-for="(ball,index) in balls"
@@ -319,13 +327,28 @@ Vue.component("obj-world", {
 			balls.push(ball)
 		}
 
+		let mushrooms = []
+		let mushroomsCount = 30
+		for (var i = 0; i < mushroomsCount; i++) {
+			let h = 0 // Size from 1 to 3
+			let mushroom = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r =  15 + 20*noise(i)
+			let theta = 20*i + noise(i*20)
+			mushroom.position.setToCylindrical(r, theta, h/2)
+			mushroom.lookAt(0,0,0)
+			mushrooms.push(mushroom)
+		}
 
 		return {
 			trees: trees,
 			trees2: trees2,
 			trees3: trees3,
 			rocks: rocks,
-			balls: balls
+			balls: balls,
+			mushrooms: mushrooms,
 		}
 	},
 

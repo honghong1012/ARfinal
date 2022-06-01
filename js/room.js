@@ -147,7 +147,7 @@ class Room {
 
 				if (fakeBodies.length < fakeBodyCount && Math.random() < .1) {
 					
-					console.log("New fake user")
+					// console.log("New fake user")
 					// Create a fake head object
 					let head = new LiveObject(undefined, {
 						paritype: "head",
