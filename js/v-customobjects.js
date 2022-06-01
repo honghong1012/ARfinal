@@ -208,6 +208,47 @@ Vue.component("obj-world", {
 			:position="tree.position.toAFrame()">
 		</a-entity>
 
+		<a-entity gltf-model="url(models/wooden_stool/scene.gltf)" scale="0.02 0.02 0.02"
+		v-for="(stool,index) in stools"
+			:key="'stool' + index"
+			shadow    
+			:rotation="stool.rotation.toAFrame()"
+			:position="stool.position.toAFrame()">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/wooden_stool/scene.gltf)" scale="0.02 0.02 0.02"
+		v-for="(stool,index) in stools2"
+			:key="'stool' + index"
+			shadow    
+			:rotation="stool.rotation.toAFrame()"
+			:position="stool.position.toAFrame()">
+		</a-entity>
+
+
+		<a-entity gltf-model="url(models/cocktail_sign/scene.gltf)" 
+			position="1 5 -3"
+			scale = "0.1 0.1 0.1"
+			rotation = "0 0 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/wooden_bar/scene.gltf)" 
+			position="1 0 -5"
+			scale = "0.02 0.03 0.02"
+			rotation = "0 20 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/beer/scene.gltf)" 
+			position="0.6 1.2 -5"
+			scale = "3 3 3"
+			rotation = "0 0 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/cocktail_martini/scene.gltf)" 
+			position="1 1.2 -5"
+			scale = "2 2 2"
+			rotation = "0 0 0">
+		</a-entity>
+
 		<a-box 
 			v-for="(rock,index) in rocks"
 			:key="'rock' + index"
@@ -341,6 +382,37 @@ Vue.component("obj-world", {
 			mushrooms.push(mushroom)
 		}
 
+		let stools = []
+		let stoolsCount = 5
+		for (var i = 0; i < stoolsCount; i++) {
+		let h = 0 // Size from 1 to 3
+			let stool = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r =  5 + 20*noise(i)
+			let theta = 20*i + noise(i*20)
+			stool.position.setToCylindrical(r - 5, 2, h/2)
+			stool.lookAt(0,0,0)
+			stools.push(stool)
+		}
+
+		let stools2 = []
+		let stoolsCount2 = 10
+		for (var i = 0; i < stoolsCount2; i++) {
+		let h = 0 // Size from 1 to 3
+			let stool = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r =  5 + 20*noise(i)
+			let theta = 20*i + noise(i*20)
+			stool.position.setToCylindrical(r, theta, h/2)
+			stool.lookAt(0,0,0)
+			stools2.push(stool)
+		}
+
+
 		return {
 			trees: trees,
 			trees2: trees2,
@@ -348,6 +420,8 @@ Vue.component("obj-world", {
 			rocks: rocks,
 			balls: balls,
 			mushrooms: mushrooms,
+			stools: stools,
+			stools2: stools2,
 		}
 	},
 
