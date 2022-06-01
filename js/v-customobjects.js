@@ -154,12 +154,12 @@ Vue.component("obj-world", {
 	template: `
 	<a-entity>
 		<!--------- SKYBOX --------->
-		<a-sky color="lightblue"></a-sky>
+		<a-sky color="#270d2c"></a-sky>
 
 		<a-plane 
 			roughness="1"
 			shadow 
-			color="hsl(140,40%,40%)"
+			color="#52430e"
 			height="100" 
 			width="100" 
 			rotation="-90 0 0">
@@ -174,24 +174,80 @@ Vue.component("obj-world", {
 			castShadow target="#directionaltarget">
 			<a-entity id="directionaltarget" position="-10 0 -20"></a-entity>
 		</a-light>
-
-		<a-cone 
-			v-for="(tree,index) in trees"
+		
+		<a-entity gltf-model="url(models/arbol1/scene.gltf)" 
+		v-for="(tree,index) in trees"
 			:key="'tree' + index"
-			shadow 
-
-			:color="tree.color.toHex()"
-			:base-radius="tree.size.z" 
-			:height="tree.size.y" 
-
-			segments-radial=10
-			segments-height=1
-			
+			shadow 			
 			:rotation="tree.rotation.toAFrame()"
 			:position="tree.position.toAFrame()">
-		</a-cone>
+		</a-entity>
 
-		
+		<a-entity gltf-model="url(models/arbol1/scene.gltf)" position="0 10 0"></a-entity>
+		<a-entity gltf-model="url(models/pine_tree/scene.gltf)" scale="0.7 0.7 0.7"
+		v-for="(tree,index) in trees3"
+			:key="'tree3' + index"
+			shadow 			
+			:rotation="tree.rotation.toAFrame()"
+			:position="tree.position.toAFrame()">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/night_mushrooms/scene.gltf)" scale="0.3 0.3 0.3"
+		v-for="(mushroom,index) in mushrooms"
+			:key="'mushroom' + index"
+			shadow 			
+			:rotation="mushroom.rotation.toAFrame()"
+			:position="mushroom.position.toAFrame()">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/arbol2/scene.gltf)" 
+		v-for="(tree,index) in trees2"
+			:key="'tree2' + index"
+			shadow 			
+			:rotation="tree.rotation.toAFrame()"
+			:position="tree.position.toAFrame()">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/wooden_stool/scene.gltf)" scale="0.02 0.02 0.02"
+		v-for="(stool,index) in stools"
+			:key="'stool' + index"
+			shadow    
+			:rotation="stool.rotation.toAFrame()"
+			:position="stool.position.toAFrame()">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/wooden_stool/scene.gltf)" scale="0.02 0.02 0.02"
+		v-for="(stool,index) in stools2"
+			:key="'stool' + index"
+			shadow    
+			:rotation="stool.rotation.toAFrame()"
+			:position="stool.position.toAFrame()">
+		</a-entity>
+
+
+		<a-entity gltf-model="url(models/cocktail_sign/scene.gltf)" 
+			position="1 5 -3"
+			scale = "0.1 0.1 0.1"
+			rotation = "0 0 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/wooden_bar/scene.gltf)" 
+			position="1 0 -5"
+			scale = "0.02 0.03 0.02"
+			rotation = "0 20 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/beer/scene.gltf)" 
+			position="0.6 1.2 -5"
+			scale = "3 3 3"
+			rotation = "0 0 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/cocktail_martini/scene.gltf)" 
+			position="1 1.2 -5"
+			scale = "2 2 2"
+			rotation = "0 0 0">
+		</a-entity>
 
 		<a-box 
 			v-for="(rock,index) in rocks"
@@ -208,7 +264,17 @@ Vue.component("obj-world", {
 			:rotation="rock.rotation.toAFrame()"
 			:position="rock.position.toAFrame()">
 		</a-box>
+		<a-entity gltf-model="url(models/anya/scene.gltf)" position="0 0 -10" animation="property: rotation; to: 0 360 0; loop: true; dur: 1000; pauseEvents:click; "
+		>
+		</a-entity>
 
+		<a-entity 
+			v-for="(ball,index) in balls"
+			:key="'ball' + index"
+			:position="ball.position.toAFrame()">
+			<a-sphere radius="0.2" material="emissive: yellow; emissive-intensity: 0.6;"></a-sphere>
+			<a-image width="1" height="1" src="#glow" color="yellow" material="transparent: true; opacity: 1.0; alphaTest: 0.01;"></a-image>
+		</a-entity>
 	</a-entity>
 		`,
 
@@ -224,29 +290,59 @@ Vue.component("obj-world", {
 		// If you only use "noise" and not "random", 
 		// everyone will have the same view. (Wordle-style!)
 		let trees = []
-		let count = 30
+		let count = 10
 		for (var i = 0; i < count; i++) {
 			let h = 6 + 4*noise(i) // Size from 1 to 3
 			let tree = new LiveObject(undefined, { 
 				size: new THREE.Vector3(.3, h, .3),
 				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
 			})
-			let r = 20 + 10*noise(i*40)
-			let theta = 2*noise(i*10)
+			let r = 20 + 20*noise(i*30)
+			let theta = 2*noise(i*20)
 			tree.position.setToCylindrical(r, theta, h/2)
 			tree.lookAt(0,1,0)
 			trees.push(tree)
 		}
 
+		let trees2 = []
+		let tree2Count = 10
+		for (var i = 0; i < tree2Count; i++) {
+			let h = 6 + noise(i * 10) // Size from 1 to 3
+			let tree = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r = 5 + 20*noise(i)
+			let theta = 20 * i + noise(i)
+			tree.position.setToCylindrical(r, theta, h/2)
+			tree.lookAt(0,2,0)
+			trees2.push(tree)
+		}
+
+		let trees3 = []
+		let tree3Count = 10
+		for (var i = 0; i < tree3Count; i++) {
+			let h = noise(i) // Size from 1 to 3
+			let tree = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r = 20 + 15*noise(i)
+			let theta = 18 * i + noise(i*20)
+			tree.position.setToCylindrical(r, theta, h/2)
+			tree.lookAt(0,0,0)
+			trees3.push(tree)
+		}
+
 		let rocks = []
-		let rockCount = 20
+		let rockCount = 10
 		for (var i = 0; i < rockCount; i++) {
 			let h = 1.2 + noise(i*100) // Size from 1 to 3
 			let rock = new LiveObject(undefined, { 
 				size: new THREE.Vector3(h, h, h),
 				color: new Vector(noise(i)*30 + 140, 0, 40 + 20*noise(i*3))
 			})
-			let r = 4 + 1*noise(i*1)
+			let r = 10 + 5*noise(i*1)
 			// Put them on the other side
 			let theta = 2*noise(i*10) + 3
 			rock.position.setToCylindrical(r, theta, h*.3)
@@ -255,10 +351,76 @@ Vue.component("obj-world", {
 			rocks.push(rock)
 		}
 
+		let balls = []
+		let ballCount = 50
+		for (var i = 0; i < ballCount; i++) {
+			let h = 4 + noise(i*50) // Size from 1 to 3
+			let ball = new LiveObject(undefined, { 
+				size: new THREE.Vector3(h, h, h),
+				color: new Vector(noise(i)*30 + 140, 0, 40 + 20*noise(i*3))
+			})
+			let r = 30*noise(i*10)
+			let theta = noise(i)*10 + 30
+			ball.position.setToCylindrical(r, theta, h*2)
+			// Look randomly
+			ball.lookAt(Math.random()*100,Math.random()*100,Math.random()*100)
+			balls.push(ball)
+		}
+
+		let mushrooms = []
+		let mushroomsCount = 30
+		for (var i = 0; i < mushroomsCount; i++) {
+			let h = 0 // Size from 1 to 3
+			let mushroom = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r =  15 + 20*noise(i)
+			let theta = 20*i + noise(i*20)
+			mushroom.position.setToCylindrical(r, theta, h/2)
+			mushroom.lookAt(0,0,0)
+			mushrooms.push(mushroom)
+		}
+
+		let stools = []
+		let stoolsCount = 5
+		for (var i = 0; i < stoolsCount; i++) {
+		let h = 0 // Size from 1 to 3
+			let stool = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r =  5 + 20*noise(i)
+			let theta = 20*i + noise(i*20)
+			stool.position.setToCylindrical(r - 5, 2, h/2)
+			stool.lookAt(0,0,0)
+			stools.push(stool)
+		}
+
+		let stools2 = []
+		let stoolsCount2 = 10
+		for (var i = 0; i < stoolsCount2; i++) {
+		let h = 0 // Size from 1 to 3
+			let stool = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r =  5 + 20*noise(i)
+			let theta = 20*i + noise(i*20)
+			stool.position.setToCylindrical(r, theta, h/2)
+			stool.lookAt(0,0,0)
+			stools2.push(stool)
+		}
 
 		return {
 			trees: trees,
-			rocks: rocks
+			trees2: trees2,
+			trees3: trees3,
+			rocks: rocks,
+			balls: balls,
+			mushrooms: mushrooms,
+			stools: stools,
+			stools2: stools2,
 		}
 	},
 
