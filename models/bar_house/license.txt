@@ -1,0 +1,11 @@
+Model Information:
+* title:	Lowpoly Viking Blacksmith and Bar
+* source:	https://sketchfab.com/3d-models/lowpoly-viking-blacksmith-and-bar-19add6b492b04eb99a6a4285dec1a166
+* author:	erikleiram (https://sketchfab.com/erikleiram)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Lowpoly Viking Blacksmith and Bar" (https://sketchfab.com/3d-models/lowpoly-viking-blacksmith-and-bar-19add6b492b04eb99a6a4285dec1a166) by erikleiram (https://sketchfab.com/erikleiram) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
