@@ -183,6 +183,7 @@ Vue.component("obj-world", {
 			:position="tree.position.toAFrame()">
 		</a-entity>
 
+		<a-entity gltf-model="url(models/arbol1/scene.gltf)" position="0 10 0"></a-entity>
 		<a-entity gltf-model="url(models/pine_tree/scene.gltf)" scale="0.7 0.7 0.7"
 		v-for="(tree,index) in trees3"
 			:key="'tree3' + index"
@@ -207,6 +208,52 @@ Vue.component("obj-world", {
 			:position="tree.position.toAFrame()">
 		</a-entity>
 
+		<a-entity gltf-model="url(models/wooden_stool/scene.gltf)" scale="0.02 0.02 0.02"
+		v-for="(stool,index) in stools"
+			:key="'stool' + index"
+			shadow    
+			:rotation="stool.rotation.toAFrame()"
+			:position="stool.position.toAFrame()">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/wooden_stool/scene.gltf)" scale="0.02 0.02 0.02"
+		v-for="(stool,index) in stools2"
+			:key="'stool' + index"
+			shadow    
+			:rotation="stool.rotation.toAFrame()"
+			:position="stool.position.toAFrame()">
+		</a-entity>
+
+
+		<a-entity gltf-model="url(models/neon_serendipity_sign/scene.gltf)" 
+			position="-1.5 2.5 -6"
+			rotation = "0 30 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/beer/scene.gltf)" 
+			position="-1.6 0.82 -5"
+			scale = "3 3 3"
+			rotation = "0 0 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/cocktail_martini/scene.gltf)" 
+			position="-1 0.82 -5"
+			scale = "2 2 2"
+			rotation = "0 0 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/table_and_chair/scene.gltf)" 
+			position="-1 0 -5"
+			scale = "1 1 1"
+			rotation = "0 40 0">
+		</a-entity>
+
+		<a-entity gltf-model="url(models/restaurant_sign/scene.gltf)" 
+			position="3 1 5"
+			scale = "0.5 0.5 0.5"
+			rotation = "0 30 0">
+		</a-entity>
+
 		<a-box 
 			v-for="(rock,index) in rocks"
 			:key="'rock' + index"
@@ -222,6 +269,17 @@ Vue.component("obj-world", {
 			:rotation="rock.rotation.toAFrame()"
 			:position="rock.position.toAFrame()">
 		</a-box>
+		<a-entity gltf-model="url(models/anya/scene.gltf)" 
+			position="0 0 -10" 
+			animation="property: rotation; to: 0 360 0; loop: true; dur: 1000; pauseEvents:click; "
+			>
+		</a-entity>
+
+		<a-entity gltf-model="url(models/bar_house/scene.gltf)" 
+			position="1 0 10"
+			scale = "5 5 5"
+			rotation = "0 160 0">
+		</a-entity>
 
 		<a-entity 
 			v-for="(ball,index) in balls"
@@ -332,10 +390,41 @@ Vue.component("obj-world", {
 			})
 			let r =  15 + 20*noise(i)
 			let theta = 20*i + noise(i*20)
-			mushroom.position.setToCylindrical(r, theta, h/2)
+			mushroom.position.setToCylindrical(r-2, theta, h/2)
 			mushroom.lookAt(0,0,0)
 			mushrooms.push(mushroom)
 		}
+
+		let stools = []
+		let stoolsCount = 5
+		for (var i = 0; i < stoolsCount; i++) {
+		let h = 0 // Size from 1 to 3
+			let stool = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r =  5 + 20*noise(i)
+			let theta = 20*i + noise(i*20)
+			stool.position.setToCylindrical(r - 5, 2, h/2)
+			stool.lookAt(0,0,0)
+			stools.push(stool)
+		}
+
+		let stools2 = []
+		let stoolsCount2 = 10
+		for (var i = 0; i < stoolsCount2; i++) {
+		let h = 0 // Size from 1 to 3
+			let stool = new LiveObject(undefined, { 
+				size: new THREE.Vector3(.3, h, .3),
+				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
+			})
+			let r =  5 + 20*noise(i)
+			let theta = 20*i + noise(i*20)
+			stool.position.setToCylindrical(r, theta, h/2)
+			stool.lookAt(0,0,0)
+			stools2.push(stool)
+		}
+
 
 		return {
 			trees: trees,
@@ -344,6 +433,7 @@ Vue.component("obj-world", {
 			rocks: rocks,
 			balls: balls,
 			mushrooms: mushrooms,
+			stools: stools,
 		}
 	},
 
