@@ -5,22 +5,34 @@
 
 <head>
 	<title>Pari passu - SOCIAL</title>
+
 	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+
+
+>>>>>>> new-proj
 
 	<!-- CSS -->
 	<link rel="icon" href="css/img/favicon.ico">
 	<link rel="stylesheet" href="css/page.css">
 	<link rel="stylesheet" href="css/paripassu.css">
 	
+	<!-- Firebase --> 
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+	https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+	
+		
+
+
 
 	<!-- External libs -->
 	<script  src="js/vendor/uuidv4.min.js"></script>
-	
 	<script  src="js/vendor/aframe.min.js"></script>
-	<!-- <script  src="js/vendor/aframe-clickdrag-jesstelford.js"></script> -->
-  	<!-- <script src="https://unpkg.com/aframe-click-drag-component"></script> -->
-  	<!--   <script src="https://jesstelford.github.io/aframe-click-drag-component/build.js"></script> -->
- 
 	<script  src="js/vendor/simplex-noise.js"></script>
 	<script  src="js/vendor/uuidv4.min.js"></script>
 	<script  src="js/vendor/vue.js"></script>
@@ -37,7 +49,7 @@
 	
 	<script  src="js/test-body.js" ></script>
 
-
+	<!-- YOUR CODE GOES IN THESE TWO -->
 	<script  src="js/custom.js" ></script>
 	<script  src="js/v-customobjects.js" ></script>
 
@@ -48,10 +60,6 @@
 	<script  src="js/room.js" ></script>
 	<script  src="js/app.js" ></script>
 
-	<script src="https://unpkg.com/aframe-area-light-component/dist/aframe-area-light-component.min.js"></script>
-	<script src="https://rawcdn.githack.com/elbobo/aframe-animation-toggle-component/7ef92afbc8b16ad34c1689945ff9f46c570be2d6/dist/aframe-animation-toggle-component.js"></script>
-
-	
 	<script type="module">
 	// Import the functions you need from the SDKs you need
 		console.log("CONNECTING TO FIREBASE")
@@ -61,30 +69,29 @@
 		// Your web app's Firebase configuration
 		// It's ok for this to be public! Its visible in any web page
 		const firebaseConfig = {
-			apiKey: "AIzaSyBxL1tQCX0ozX4kMxdeIsNiga51axMsdWw",
-			authDomain: "ar-forest.firebaseapp.com",
-			projectId: "ar-forest",
-			storageBucket: "ar-forest.appspot.com",
-			messagingSenderId: "665811815691",
-			appId: "1:665811815691:web:a73d9545244e7c68f8e60e",
-			measurementId: "G-P82ZT45DVQ"
+			apiKey: "AIzaSyDZO5KrCfUsyg3-H25kUAZ_Z6aDv8KZAHA",
+			authDomain: "paripassu-e9c1b.firebaseapp.com",
+			databaseURL: "https://paripassu-e9c1b-default-rtdb.firebaseio.com",
+			projectId: "paripassu-e9c1b",
+			storageBucket: "paripassu-e9c1b.appspot.com",
+			messagingSenderId: "395560885213",
+			appId: "1:395560885213:web:3844e290560d34f46b7434"
 		};
 
 		// Initialize Firebase
 		firebase.initializeApp(firebaseConfig);
+		console.log("FIREBASE INIT")
 
 		// Subscribing to auth changes
 		firebase.auth().onAuthStateChanged((user) => {
+			console.log("FIREBASE AUTH")
+
 			if (user) {
 				// User is signed in, see docs for a list of available properties
 				// https://firebase.google.com/docs/reference/js/firebase.User
 				var uid = user.uid;
-				console.log(`Firebase: ${uid} user just signed in`)
-				room.connectToFirebase({
-					user: user,
-					authID: uid, 
-					databaseRef: firebase.database()
-				})
+				room.onAuth(uid, firebase.database())
+
 				// ...
 			} else {
 				// User is signed out
@@ -96,9 +103,10 @@
 		});
 
 		// Attempting authenticate anonymously
+		console.log("FIREBASE SIGNIN...")
 		firebase.auth().signInAnonymously()
 		.then(() => {
-			console.log("Firebase auth: Signed in anonynmously")
+			console.log("...Firebase auth: Signed in anonynmously")
 		})
 		.catch((error) => {
 			var errorCode = error.code;

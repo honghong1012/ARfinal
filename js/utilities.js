@@ -15,7 +15,7 @@ try {
 	}
 
 	noise.seed = function(seed) {
-		// console.log("Set noise seed = ", seed)
+		console.log("Set noise seed = ", seed)
 		simplex = new SimplexNoise(seed)
 		let s = []
 		for (var i = 0; i < 10; i++) {
