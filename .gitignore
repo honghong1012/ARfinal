@@ -64,3 +64,5 @@ node_modules/
 
 # dotenv environment variables file
 .env
+models/.DS_Store~19431579f1acde9b993b5bdc0769d93879a52da4
+.DS_Store~19431579f1acde9b993b5bdc0769d93879a52da4
