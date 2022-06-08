@@ -27,6 +27,10 @@ AFRAME.registerComponent('rotation-reader', {
               <a-asset-item id="tree1" src="models/arbol1/scene.gltf"></a-asset-item>
               <a-asset-item id="tree2" src="models/arbol2/scene.gltf"></a-asset-item>
               <a-asset-item id="anya" src="models/anya/scene.gltf"</a-asset-item>
+              <img id="cloth" crossorigin="anonymous" src="img/textures/cloth.png" >
+              <img id="cloth2" crossorigin="anonymous" src="img/textures/cloth2.png" >
+              <img id="stone" crossorigin="anonymous" src="img/textures/stone.png" >
+              <img id="grassblock" crossorigin="anonymous" src="img/textures/grassblock.png" >
   
           </a-assets>
           
@@ -39,20 +43,20 @@ AFRAME.registerComponent('rotation-reader', {
               <a-text 
                   v-if="room.userHead"
                   width=".8"
-                  color="black"
+                  color="white"
                   :value="room.userHead.position.toFixed(2)" 
                   position="-.7 .7 -1">
               </a-text>
               
               <a-text 
                   width="2"
-                  color="black"
+                  color="white"
                   :value="room.titleText" 
                   position="-.7 .6 -1">
               </a-text>
               <a-text 
                   width="1"
-                  color="black"
+                  color="white"
                   :value="room.detailText" 
                   position="-.7 .5 -1">
               </a-text>
@@ -68,6 +72,8 @@ AFRAME.registerComponent('rotation-reader', {
               <!--------- ALL THE OBJECTS YOU'VE MADE --------->
               <live-object  v-for="obj in room.objects" :key="obj.uid" :obj="obj" v-if="obj.room.userHead !== obj" />
           </a-entity>
+
+          
   
   
       </a-scene>`,

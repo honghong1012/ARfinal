@@ -11,7 +11,7 @@
 class Room {
 	constructor() {
 		this.tempDisplayName = params.name || words.getUserName()
-		this.setID(params.room || "test")
+		this.setID(params.room || "AR-Forest")
 		
 		// Update loop runs regardless of roomID
 		// Initialize an update loop
@@ -50,6 +50,7 @@ class Room {
 
 		this.titleText = "Room: " + this.roomID
 		this.detailText = "some text here"
+
 
 		noise.seed(this.idNumber)
 		// Both uid->Obj maps

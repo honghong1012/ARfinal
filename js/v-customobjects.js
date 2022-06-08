@@ -1,4 +1,4 @@
-const fakeBodyCount = 10
+const fakeBodyCount = 0
 const fakeBodySteps = 500
 
 // Decorate the head of our guests
@@ -8,22 +8,39 @@ Vue.component("obj-head", {
 			shadow
 			:radius="headSize"
 			:color="obj.color.toHex()" 
-				
 			>
-			<obj-axes scale=".1 .1 .1" v-if="true" />
+
 		</a-sphere>
 
 		<a-box v-for="(spike,index) in spikes"
 			:depth="headSize*2"
-			:height="headSize*.2"
+			:height="headSize*1"
 			:width="headSize*2"
-			:position="spike.position.toAFrame(0, .2, 0)"
+			:position="spike.position.toAFrame(0, -0.5, 0)"
 			:rotation="spike.rotation.toAFrame()"
-			:color="obj.color.toHex(Math.sin(index))" 
-				
+			:material="clothMaterial"
 			>
-		
 		</a-box>
+
+		<a-torus v-for="(ring,index) in rings"
+			:position="ring.position.toAFrame(0, 0.3, 0)"
+			:rotation="ring.rotation.toAFrame()"
+			:radius="radius"
+			:radius-tubular="aRadius"
+			:material="hatMaterial"
+			>
+		</a-torus>
+
+
+		// <a-box v-for="(spike,index) in spikes"
+		// 	:depth="headSize*2"
+		// 	:height="headSize*.2"
+		// 	:width="headSize*2"
+		// 	:position="spike.position.toAFrame(0, .2, 0)"
+		// 	:rotation="spike.rotation.toAFrame()"
+		// 	:color="obj.color.toHex(Math.sin(index))" 			
+		// 	>		
+		// </a-box>
 	</a-entity>
 	`,
 	computed: {
@@ -32,30 +49,67 @@ Vue.component("obj-head", {
 		},
 		headSize() {
 			return this.obj.size instanceof Vector ? this.obj.size.x : this.obj.size
+						// <obj-axes scale=".1 .1 .1" v-if="true" />
+						// :color="obj.color.toHex(Math.sin(index))"
 		},
+		clothMaterial() {
+			let custome = []
+			custome.push("src: #cloth")
+			custome.push("src: #cloth2")
+			custome.push("src: #grassblock")
+			custome.push("src: #stone")
+			let index = Math.floor(Math.random() * 4)
+			console.log("index:"+ index)
+			return custome[index]
+			// return `emissive:${this.obj.color.toHex(.2)}`
+		},
+		radius(){
+			return this.headSize* Math.random() * 0.6
+		},
+		aRadius(){
+			return this.radius / 2
+		},
+		hatMaterial(){
+			return `emissive:${this.obj.color.toHex(.2)}`
+		}
 	},
 
 	data() {
 		let spikeCount = 5
 		let spikes = []
-
+		let rings = []
 		for (var i = 0; i < spikeCount; i++) {
 			let h = .1
 			let spike = new LiveObject(undefined, { 
-				size: new THREE.Vector3(h*.2, h, h*.2),
-				color: new Vector(noise(i)*30 + 140, 0, 40 + 20*noise(i*3))
+				// size: new THREE.Vector3(h*.2, h, h*.2),
+				// color: new Vector(noise(i)*30 + 140, 0, 40 + 20*noise(i*3))
 			})
-			let r = .2
+			let r = .5
 			// Put them on the other side
-			let theta = 2*noise(i*10) + 3
-			spike.position.setToCylindrical(r, theta, h*.3)
+			// let theta = 2*noise(i*10) + 3
+			// spike.position.setToCylindrical(r, theta, h*.3)
 			// Look randomly
 			spike.lookAt(0, 3, 0)
 			spikes.push(spike)
 		}
+		for (var i = 0; i < spikeCount; i++) {
+			let h = .1
+			let ring = new LiveObject(undefined, { 
+				// size: new THREE.Vector3(h*.2, h, h*.2),
+				// color: new Vector(noise(i)*30 + 140, 0, 40 + 20*noise(i*3))
+			})
+			// let r = .5
+			// Put them on the other side
+			// let theta = 2*noise(i*10) + 3
+			// spike.position.setToCylindrical(r, theta, h*.3)
+			// Look randomly
+			ring.lookAt(0, 3, 0)
+			rings.push(ring)
+		}
 
 		return {
-			spikes: spikes
+			spikes: spikes,
+			rings: rings
 		}
 	},
 
@@ -216,15 +270,6 @@ Vue.component("obj-world", {
 			:position="stool.position.toAFrame()">
 		</a-entity>
 
-		<a-entity gltf-model="url(models/wooden_stool/scene.gltf)" scale="0.02 0.02 0.02"
-		v-for="(stool,index) in stools2"
-			:key="'stool' + index"
-			shadow    
-			:rotation="stool.rotation.toAFrame()"
-			:position="stool.position.toAFrame()">
-		</a-entity>
-
-
 		<a-entity gltf-model="url(models/neon_serendipity_sign/scene.gltf)" 
 			position="-1.5 2.5 -6"
 			rotation = "0 30 0">
@@ -249,7 +294,7 @@ Vue.component("obj-world", {
 		</a-entity>
 
 		<a-entity gltf-model="url(models/restaurant_sign/scene.gltf)" 
-			position="3 1 5"
+			position="4 0.5 7"
 			scale = "0.5 0.5 0.5"
 			rotation = "0 30 0">
 		</a-entity>
@@ -396,7 +441,7 @@ Vue.component("obj-world", {
 		}
 
 		let stools = []
-		let stoolsCount = 5
+		let stoolsCount = 10
 		for (var i = 0; i < stoolsCount; i++) {
 		let h = 0 // Size from 1 to 3
 			let stool = new LiveObject(undefined, { 
@@ -405,26 +450,11 @@ Vue.component("obj-world", {
 			})
 			let r =  5 + 20*noise(i)
 			let theta = 20*i + noise(i*20)
-			stool.position.setToCylindrical(r - 5, 2, h/2)
+			// stool.position.setToCylindrical(r - 5, 2, h/2)
+			stool.position.setToCylindrical(r, theta, h*2)
 			stool.lookAt(0,0,0)
 			stools.push(stool)
 		}
-
-		let stools2 = []
-		let stoolsCount2 = 10
-		for (var i = 0; i < stoolsCount2; i++) {
-		let h = 0 // Size from 1 to 3
-			let stool = new LiveObject(undefined, { 
-				size: new THREE.Vector3(.3, h, .3),
-				color: new Vector(noise(i*50)*30 + 160, 100, 40 + 10*noise(i*10))
-			})
-			let r =  5 + 20*noise(i)
-			let theta = 20*i + noise(i*20)
-			stool.position.setToCylindrical(r, theta, h/2)
-			stool.lookAt(0,0,0)
-			stools2.push(stool)
-		}
-
 
 		return {
 			trees: trees,
